@@ -13,12 +13,22 @@
     {
         public override string BasePath => "/v1/identity/verification_sessions";
 
-        public virtual VerificationSession Cancel(string id, VerificationSessionCancelOptions options = null, RequestOptions requestOptions = null)
+        public virtual VerificationSession Cancel(string id, VerificationSessionCancelOptions options, RequestOptions requestOptions = null)
         {
+            if (options.StripeVersion == null)
+            {
+                throw new System.ArgumentException("The StripeVersion parameter has to be set when creating a Verification Session", "StripeVersion");
+            }
+
+            // Creating a Verification Session requires a specific API version to be set. This is handled as a parameter
+            // but has to be set on the RequestOptions instead.
+            requestOptions = requestOptions ?? new RequestOptions();
+            requestOptions.StripeVersion = options.StripeVersion;
+
             return this.Request(HttpMethod.Post, $"{this.InstanceUrl(id)}/cancel", options, requestOptions);
         }
 
-        public virtual Task<VerificationSession> CancelAsync(string id, VerificationSessionCancelOptions options = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Task<VerificationSession> CancelAsync(string id, VerificationSessionCancelOptions options, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return this.RequestAsync(HttpMethod.Post, $"{this.InstanceUrl(id)}/cancel", options, requestOptions, cancellationToken);
         }
@@ -43,7 +53,7 @@
             return this.CreateEntityAsync(options, requestOptions, cancellationToken);
         }
 
-        public VerificationSession Get(string id, VerificationSessionGetOptions options = null, RequestOptions requestOptions = null)
+        public VerificationSession Get(string id, VerificationSessionGetOptions options, RequestOptions requestOptions = null)
         {
             if (options.StripeVersion == null)
             {
@@ -58,12 +68,12 @@
             return this.GetEntity(id, options, requestOptions);
         }
 
-        public Task<VerificationSession> GetAsync(string id, VerificationSessionGetOptions options = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Task<VerificationSession> GetAsync(string id, VerificationSessionGetOptions options, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return this.GetEntityAsync(id, options, requestOptions, cancellationToken);
         }
 
-        public StripeList<VerificationSession> List(VerificationSessionListOptions options = null, RequestOptions requestOptions = null)
+        public StripeList<VerificationSession> List(VerificationSessionListOptions options, RequestOptions requestOptions = null)
         {
             if (options.StripeVersion == null)
             {
@@ -78,12 +88,12 @@
             return this.ListEntities(options, requestOptions);
         }
 
-        public Task<StripeList<VerificationSession>> ListAsync(VerificationSessionListOptions options = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Task<StripeList<VerificationSession>> ListAsync(VerificationSessionListOptions options, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return this.ListEntitiesAsync(options, requestOptions, cancellationToken);
         }
 
-        public IEnumerable<VerificationSession> ListAutoPaging(VerificationSessionListOptions options = null, RequestOptions requestOptions = null)
+        public IEnumerable<VerificationSession> ListAutoPaging(VerificationSessionListOptions options, RequestOptions requestOptions = null)
         {
             if (options.StripeVersion == null)
             {
@@ -98,7 +108,7 @@
             return this.ListEntitiesAutoPaging(options, requestOptions);
         }
 
-        public IAsyncEnumerable<VerificationSession> ListAutoPagingAsync(VerificationSessionListOptions options = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public IAsyncEnumerable<VerificationSession> ListAutoPagingAsync(VerificationSessionListOptions options, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             return this.ListEntitiesAutoPagingAsync(options, requestOptions, cancellationToken);
         }
