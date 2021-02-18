@@ -73,6 +73,6 @@
         /// VerifiedOutputs.
         /// </summary>
         [JsonProperty("verified_outputs")]
-        public string VerifiedOutputs { get; set; }
+        public VerifiedOutputs VerifiedOutputs { get; set; }
     }
 }
