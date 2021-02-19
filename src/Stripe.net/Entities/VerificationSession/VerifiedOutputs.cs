@@ -2,7 +2,7 @@
 {
     using Newtonsoft.Json;
 
-    public class VerifiedOutputs : StripeEntity<StripeError>
+    public class VerifiedOutputs : StripeEntity<VerifiedOutputs>
     {
         /// <summary>
         /// The person's address.
