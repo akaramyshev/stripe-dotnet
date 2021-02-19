@@ -30,7 +30,7 @@
         /// Hash of details on the last error encountered in the verification process.
         /// </summary>
         [JsonProperty("last_error")]
-        public StripeError LastError { get; set; }
+        public VerificationSessionError LastError { get; set; }
 
         /// <summary>
         /// LastVerificationReport.
