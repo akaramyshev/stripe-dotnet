@@ -276,6 +276,11 @@ namespace Stripe
         public const string FileCreated = "file.created";
 
         /// <summary>
+        ///  Occurs whenever a verification session is updated.
+        /// </summary>
+        public const string IdentityVerificationSessionUpdated = "identity.verification_session.updated";
+
+        /// <summary>
         /// Occurs whenever a new invoice is created. To learn how webhooks can be used with this
         /// event, and how they can affect it, see
         /// <a href="https://stripe.com/docs/subscriptions/webhooks">Using Webhooks with
