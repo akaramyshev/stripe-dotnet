@@ -90,6 +90,7 @@ namespace Stripe
             { "usage_record", typeof(UsageRecord) },
             { "usage_record_summary", typeof(UsageRecordSummary) },
             { "webhook_endpoint", typeof(WebhookEndpoint) },
+            { "identity.verification_session", typeof(VerificationSession) },
         });
 
         /// <summary>
